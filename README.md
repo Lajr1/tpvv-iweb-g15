@@ -1,13 +1,13 @@
-# TPVV-BoarDalo: Tu Plataforma de Pago Online de Confianza
+# tpvv-BoarDalo: Tu Plataforma de Pago Online de Confianza
 
-## 💸 ¿Por Qué TPVV-BoarDalo?
+## 💸 ¿Por Qué tpvv-BoarDalo?
 
 ---
 
-TPVV-BoarDalo transforma la manera en que manejas pagos online: seguro, rápido y fácil de integrar.
+tpvv-BoarDalo transforma la manera en que manejas pagos online: seguro, rápido y fácil de integrar.
 Ofrecemos una solución confiable que se adapta a cualquier negocio,
 brindando una experiencia de pago moderna y fluida tanto para ti como para tus clientes.
-¡Con TPVV, llevas tus transacciones al siguiente nivel!
+¡Con tpvv, llevas tus transacciones al siguiente nivel!
 
 ## 💪 Componentes del equipo
 
@@ -23,7 +23,7 @@ Somos el grupo **G15** de parácticas de la asignatura de **Ingeniería Web** de
 
 ---
 
-La API de TPVV-BoarDalo es una API REST que permite realizar pagos online de forma segura y sencilla.
+La API de tpvv-BoarDalo es una API REST que permite realizar pagos online de forma segura y sencilla.
 
 ## 🚀 Levantar el Proyecto en Local
 
@@ -31,9 +31,37 @@ La API de TPVV-BoarDalo es una API REST que permite realizar pagos online de for
 
 ### 🔥 Ejecutar la aplicación a partir del application.properties
 
+
 ```sh
 ./mvnw spring-boot:run
 ```
+
+### 🔥 Ejecutar la aplicación a partir de los contenedores de docker
+
+1. Para levantar la base de datos de `PostgreSQL` en un contenedor de `Docker`, ejecutar el siguiente comando:
+
+```sh
+docker run --name postgres-tpvv-develop -e POSTGRES_USER=tpvv -e POSTGRES_PASSWORD=tpvv -e POSTGRES_DB=tpvv -p 5462:5432 -d postgres:13
+```
+
+2. Para ejecutar la aplicación para que se conecte a la base de datos de PostgreSQL, ejecutar el siguiente comando:
+
+```sh
+mvn spring-boot:run -D spring-boot.run.profiles=postgres
+```
+
+3. Para levantar la base de datos de `PostgreSQL` para los TESTS en un contenedor de `Docker`, ejecutar el siguiente comando:
+
+```sh
+docker run --name postgres-tpvv-test -e POSTGRES_USER=tpvv -e POSTGRES_PASSWORD=tpvv -e POSTGRES_DB=tpvv_test -p 5463:5432 -d postgres:13
+```
+
+4. Para ejecutar los tests para que se ejecuten con la base de datos de PostgreSQL, ejecutar el siguiente comando:
+
+```sh
+mvn test "-Dspring-boot.run.profiles=postgres"
+```
+
 
 ## 🔎 Explicación del funcionamiento de la Integración del Proyecto
 
@@ -48,9 +76,9 @@ Este comercio puede ser utilizado para realizar las pruebas de **integración**.
 ---
 
 - `GET /pago/form?importe=""&idTicket=""`: Este endpoint se encarga de mostrar el formulario de pago.
-  - Esta `URL` recibe dos parámetros **obligatorios**: `importe` y `idTicket`.
-  - Asimismo, la `API Key` es manejada por este endpoint.
-  - Para que el `GET` funcione correctamente, la `API Key` debe de venir incluida en la cabecera `HTTP` (explicado con más detalle abajo).
+    - Esta `URL` recibe dos parámetros **obligatorios**: `importe` y `idTicket`.
+    - Asimismo, la `API Key` es manejada por este endpoint.
+    - Para que el `GET` funcione correctamente, la `API Key` debe de venir incluida en la cabecera `HTTP` (explicado con más detalle abajo).
 
 
 - `POST ("/pago/realizar")`: Este endpoint se encarga de mostrar el formulario de pago.
@@ -59,13 +87,12 @@ Este comercio puede ser utilizado para realizar las pruebas de **integración**.
 ## 🟢 Cómo Probar los Endpoints desde Postman
 
 
-### 📌 GET /form
+### 📌 GET /pago/form?importe=""&idTicket=""
 
 ---
 
 1. Una vez abierto `Postman`, en el cuadro de texto de la `URL` elegir `GET` e ingresar la siguiente dirección URL (podéis elegir los valores de `importe` y de `idTicket` que queráis):
-   - `http://localhost:8123/pago/form?importe=100&idTicket=1`
-   - 
+    - `http://localhost:8123/pago/form?importe=100&idTicket=1`
 ![img.png](public-resources/doc-images/img.png)
 
 2. En la pestaña de `Headers`, agregar la siguiente clave-valor:
@@ -76,7 +103,7 @@ Este comercio puede ser utilizado para realizar las pruebas de **integración**.
 
 
 3. Ingresados todos estos datos, haced click en `Send`. Si todo está correcto, se mostrará el `HTML` del formulario de pago, el cual tendrá que ser similar al siguiente:
-    
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -112,7 +139,7 @@ Este comercio puede ser utilizado para realizar las pruebas de **integración**.
 
 ![img_2.png](public-resources/doc-images/img_2.png)
 
-### 📌 POST /realizar
+### 📌 POST /pago/realizar
 
 ---
 
@@ -137,9 +164,9 @@ Este comercio puede ser utilizado para realizar las pruebas de **integración**.
     ```
 ![img_5.png](public-resources/doc-images/img_5.png)
 
-4. Ingresados todos estos datos, haced click en `Send`. 
+4. Ingresados todos estos datos, haced click en `Send`.
     - Si todo está correcto, se mostrará el siguiente mensaje:
-      - Pago procesado correctamente.
+        - Pago procesado correctamente.
     - Si hay algún error, se mostrará el siguiente mensaje:
         - Error: Faltan datos requeridos (`importe`, `ticketExt`, `tarjeta`).
 
@@ -155,4 +182,7 @@ Una vez establecidos todos estos datos, simplemente seguid **exactamente** los m
 
 ---
 
-## Eso es todo, 🤑🤑¡A disfrutar de TPVV-BoarDalo! 🤑🤑
+## Eso es todo, 🤑🤑¡A disfrutar de tpvv-BoarDalo! 🤑🤑
+
+
+
